@@ -17,7 +17,7 @@ for i in range(2000):
     data.at[np.random.randint(9000), 6] = None
 #data.to_csv('makshaev_error', sep='\t')
 
-df = pd.read_csv('makshaev_error', sep='\t', header=0, index_col=0)
+df = pd.read_csv('makshaev_err', sep='\t', header=0, index_col=0)
 print('Dirty dataframe')
 print(df.head)
 df.columns = [x for x in range(7)]
@@ -47,6 +47,6 @@ def map_data(df):
 
 
 clearDF = map_data(df)
-clearDF.to_csv('makshaev_clear', sep='\t')
+clearDF.to_csv('makshaev_clr', sep='\t')
 
 process_data(clearDF)
