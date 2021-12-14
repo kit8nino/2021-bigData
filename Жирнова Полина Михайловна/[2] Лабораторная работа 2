@@ -1,0 +1,32 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+data = pd.read_csv('battles.csv', usecols=['attacker_king', 'year'])
+
+print("\nИсходные данные:\n")
+print(data)
+
+length = []
+
+for year in data['year']:
+    namelength = 0 
+    names = data.loc[data['year'] == year]['attacker_king'].dropna()
+    for name in names:
+        namelength += len(name)
+    length.append(namelength)
+
+data['year2']=data['year']
+data['name_length']=length
+
+print("\nТаблица с данными для графика:\n")
+print(data)
+
+print("\nГрафик:\n")
+
+fig, ax = plt.subplots()
+index = data['year2']
+values = data['name_length']
+plt.bar(index,values)
+ax.set(xlim=(297, 301), xticks=np.arange(298, 301))
+plt.show()
