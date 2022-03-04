@@ -18,7 +18,7 @@ df = df.sort_values(by='fREF').groupby('fREF')
 print(all_rating.median())
 
 plt.plot(df.mean()['Rating'])
-plt.axhline(all_rating.median())
+#plt.axhline(all_rating.median())
 #plt.axhline(df.groupby('fREF').mean()['Rating'].median(),color='b',linestyle='-.')
 #plt.axhline(df.groupby('fREF').mean()['Rating'].var(),color='b',linestyle='-.')
 #plt.axhline(df.groupby('fREF').mean()['Rating'].std(),color='b',linestyle='-.')
