@@ -15,8 +15,19 @@ for i in all_ref:
 df['fREF'] = f_ref
 df = df.sort_values(by='fREF').groupby('fREF')
 
-print(all_rating.median())
+# print(df.head())
 
-plt.plot(df.mean()['Rating'])
+plt.plot(df.mean()['Rating'],label='Усредненный график')
+# plt.plot(df['Rating'],'ro',label='Общий график')
 
+plt.axhline(df.mean()['Rating'].var(),linestyle=':',color='k',label='Дисперсия по ср.')
+plt.axhline(all_rating.var(),linestyle='-.',color='k',label='Дисперсия по общим')
+
+plt.axhline(df.mean()['Rating'].median(),linestyle=':',color='b',label='Медиана по ср.')
+plt.axhline(all_rating.median(),linestyle='-.',color='b',label='Медиана по общим')
+
+plt.axhline(df.mean()['Rating'].std(),linestyle=':',color='g',label='СКО по ср.')
+plt.axhline(all_rating.std(),linestyle='-.',color='g',label='СКО по общим')
+
+plt.legend()
 plt.show()
