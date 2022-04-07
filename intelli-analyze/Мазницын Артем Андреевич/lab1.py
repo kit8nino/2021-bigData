@@ -10,6 +10,8 @@ def lowNums(x):
 data = pd.read_csv('./flavors_of_cacao.csv', header=0)
 rating = data['Rating']
 ref = data[['REF', 'Rating']]
+data['Cocoa Percent'] = data['Cocoa Percent'].replace('%', '', regex=True)
+cocao = data[['Cocoa Percent', 'Rating']].sort_values(by="Cocoa Percent").groupby('Cocoa Percent')
 
 
 lowNums(ref)
@@ -36,4 +38,21 @@ plt.table(cellText=tab_df.values,
 plt.subplots_adjust(bottom=0.3)
 plt.legend()
 
+plt.show()
+
+
+plt.figure(2, figsize=[12, 5])
+
+plt.plot(cocoa.mean())
+plt.plot(cocoa['Rating'].max(), color='b')
+plt.plot(cocoa['Rating'].min(), color='r')
+plt.plot(cocoa['Rating'].var(), color='black')
+
+cols = data.sort_values(by='Cocoa Percent')['Cocoa Percent'].unique()
+cols = cols.astype(str)
+cols = [i.replace('.0', '') for i in cols]
+
+plt.xticks(col, rotation=90, size=9)
+
+plt.legend(['Средний рейтинг', 'Максимальный', 'Минимальный', 'Дисперсия'])
 plt.show()
