@@ -40,7 +40,6 @@ plt.legend()
 
 plt.show()
 
-
 plt.figure(2, figsize=[12, 5])
 
 plt.plot(cocoa.mean())
