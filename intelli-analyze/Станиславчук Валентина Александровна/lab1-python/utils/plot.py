@@ -19,7 +19,7 @@ def multiple_plot_bars(ser, title, xlabel, ylabel):
 
 
 def single_plot_bars(ser, title, xlabel, ylabel):
-  fig, ax = plt.subplots(nrows=1, figsize=(len(ser) * 1.3, 4))
+  fig, ax = plt.subplots(figsize=(len(ser) * 1.3, 4))
   ax.set_title(title + '\n', fontsize=14)
   
   ax.set(xlabel=xlabel, ylabel=ylabel, ylim=[0, __get_ylim(ser)])
