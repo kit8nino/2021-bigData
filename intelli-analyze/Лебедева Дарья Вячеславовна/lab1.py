@@ -11,7 +11,7 @@ reviewDateGroup = reviewDateGroup.groupby('Review Date')[['Review Date', 'Rating
 
 plt.figure(figsize=(15, 7))
 сolumn = reviewDateGroup.groups.keys()
-array = np.empty(12)
+array = np.empty(len(reviewDateGroup.groups.values()))
 
 array[...] = rating.var()
 plt.subplot(2, 2, 1)
@@ -43,11 +43,17 @@ plt.legend(fontsize=10)
 
 plt.show()
 
+#---------------------------------------------------------------------------
+
 cocoaColumn = data.sort_values(by='Cocoa Percent')['Cocoa Percent'].unique()
+cocoaColumn = cocoaColumn.astype(float)
+cocoaColumn = np.sort(cocoaColumn)
+cocoaColumn = cocoaColumn.astype(str)
+cocoaColumn = [i.replace('.0', '') for i in cocoaColumn]
 cocoaGroup = data.groupby('Cocoa Percent')['Rating']
 
 plt.figure(figsize=(15, 7))
-thirdArray = np.empty(9)
+thirdArray = np.empty(len(cocoaColumn))
 thirdArray[...] = cocoaGroup.var().fillna(0)
 plt.subplot(2, 1, 1)
 plt.plot(cocoaColumn, thirdArray, label='Дисперсия')
