@@ -22,7 +22,10 @@ print(temp)
 # Используя их, посчитать вероятность того, что новый сорт какао с содержанием выше 73% (Cocoa Percent)
 # будет иметь оценку выше 3.1 для стран b) северного полушария
 
-
+northernCountries = ['Amsterdam', 'Belgium', 'Brazil', 'Canada', 'Colombia', 'Ecuador', 'France', 'Israel', 'Italy', 'Lithuania', 'Sao Tome', 'Scotland', 'Switzerland', 'U.K.', 'U.S.A.']
+print(possibilities(data, '`Cocoa Percent` > 73'))
+temp = possibilities(data, 'Rating > 3.1 and `Cocoa Percent` > 73') / possibilities(data, '`Cocoa Percent` > 73')
+temp = temp[northernCountries]
 
 # Сделать прогноз, какова вероятность того, что обзоры какао после 2014 года будут иметь оценку выше медианной
 # по всему периоду после 2010 года.
