@@ -20,6 +20,7 @@ data = pd.read_csv('../_lab-4/imdb_movies.csv', header=0,
         usecols=['id', 'genres', 'title', 'popularity', 'release_date', 'vote_average', 'vote_count', 'link'],
         dtype=object, parse_dates=True)
 
+
 for links, ids in zip(data['link'].tolist(), data['id'].tolist()):
     try:
         if os.path.isfile(path+ids+'.jpg'):
@@ -45,7 +46,8 @@ data['genres_list'] = gnr_list
 data.to_csv('../_lab-4/final_dataset.csv')
 """
 
-data = pd.read_csv('../_lab-4/imdb_movies.csv', header=0, 
-        usecols=['id', 'genres', 'title', 'popularity', 'release_date', 'vote_average', 'vote_count', 'link'],
+data = pd.read_csv('../_lab-4/final_dataset.csv', header=0, 
+        usecols=['id', 'genres_list', 'title', 'popularity', 'release_date', 'vote_average', 'vote_count', 'link'],
         dtype=object, parse_dates=True)
-
+print(data['genres_list'].iloc[0])
+print(data['release_date'][0])
