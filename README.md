@@ -82,7 +82,20 @@
 3) Сделать прогноз, какова вероятность того, что обзоры какао после 2014 года будут иметь оценку выше медианной по всему периоду после 2010 года.
 
 # [3] Функционально программирование
+ 
+ Реализовать в функциональной парадигме приближенное вычисление корней уравнения f(x) с заданной (с клавиатуры при запуске) точностью epsilon. Вариант задания рассчитывается аналогично предыдущему.
 
+   0- ![](https://latex.codecogs.com/svg.image?\bg{black}{\color{white}&space;\ln{x}&plus;(x&plus;1)^3=0) методом касательных
+   
+   1- ![](https://latex.codecogs.com/svg.image?\bg{black}{\color{white}&space;(2-x)e^{x}=0) методом половинного деления
+   
+   2- ![](https://latex.codecogs.com/svg.image?\bg{black}{\color{white}&space;x^2=\ln(x&plus;1)) методом простых итераций
+   
+   3- ![](https://latex.codecogs.com/svg.image?\bg{black}{\color{white}&space;\lg(1&plus;2x)=2-x) методом хорд
+   
+   4- ![](https://latex.codecogs.com/svg.image?\bg{black}{\color{white}&space;2sin&space;x-arctg&space;x=0) на промежутке (2.5, 2.6) методом простых итераций
+   
+   
 # [4] Нейросетевой анализ
 
 Для начала необходимы библиотека tensorflow: $pip install tensorflow. Если есть видеокарта с поддержкой CUDA, то надо поставить ее (https://developer.nvidia.com/cuda-toolkit) и библиотеку tf-nightly-gpu: $pip install tf-nightly-gpu.
