@@ -1,5 +1,5 @@
 import json
-import ast
+from ast import literal_eval
 import tensorflow as tf
 from PIL import Image
 import os.path
@@ -48,6 +48,47 @@ data.to_csv('../_lab-4/final_dataset.csv')
 
 data = pd.read_csv('../_lab-4/final_dataset.csv', header=0, 
         usecols=['id', 'genres_list', 'title', 'popularity', 'release_date', 'vote_average', 'vote_count', 'link'],
-        dtype=object, parse_dates=True)
-print(data['genres_list'].iloc[0])
-print(data['release_date'][0])
+        dtype=object, converters={'genres_list': literal_eval}, parse_dates=True)
+data.convert_dtypes()
+
+print(data.dtypes)
+print(data['genres_list'][:3], type(data['genres_list']))
+print(data['release_date'][0], type(data['release_date'][0]))
+genres_list = data['genres_list'].explode().unique()
+print(genres_list, type(genres_list))
+
+batch_size = 32
+img_width = 190
+img_height = 281
+
+img_dir = '../_lab-4/movies_posters/'
+
+
+train_ds = tf.keras.utils.image_dataset_from_directory(directory=img_dir, image_size=(img_height, img_width),
+        validation_split=.1, subset='training', seed=99, batch_size=batch_size)
+test_ds = tf.keras.utils.image_dataset_from_directory(directory=img_dir, image_size=(img_height, img_width),
+        validation_split=.1, subset='validation', seed=99, batch_size=batch_size)
+
+img_count = len(list(data_dir.glob('*.jpg')))
+print("Total images: ", img_count)
+
+AUTOTUNE = tf.data.AUTOTUNE
+train_ds = train_ds.cashe().shuffle(1000).prefetch(buffer_size=AUTOTUNE)
+test_ds = test_ds.cashe().prefetch(buffer_size=AUTOTUNE)
+
+num_genres = len(genres_list)
+
+model = Sequential([
+    layers.Rescaling(1./255, input_shape=(img_height, img_width, 3)),
+    layers.Conv2D(16, 3, padding='same', activation='relu'),
+    layers.MaxPooling2D(),
+    layers.Conv2D(32, 3, padding='same', activation='relu'),
+    layers.MaxPooling2D(),
+    layers.Conv2D(64, 3, padding='same', activation='relu'),
+    layers.MaxPooling2D(),
+    layers.Flatten(),
+    layers.Dense(128, activation='relu'),
+    layers.Dense(num_genres)
+    ])
+
+model.compile(optimizer='adam', loss=tf.kers.losses.SparceCategoricalCrossentropy(from_logits=True), metrics=['accuracy'])
