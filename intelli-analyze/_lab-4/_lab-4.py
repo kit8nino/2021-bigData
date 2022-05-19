@@ -3,6 +3,7 @@ from ast import literal_eval
 import tensorflow as tf
 from PIL import Image
 import os.path
+import os.sep
 from bs4 import BeautifulSoup
 import requests
 import pandas as pd
@@ -51,11 +52,8 @@ data = pd.read_csv('../_lab-4/final_dataset.csv', header=0,
         dtype=object, converters={'genres_list': literal_eval}, parse_dates=True)
 data.convert_dtypes()
 
-print(data.dtypes)
-print(data['genres_list'][:3], type(data['genres_list']))
-print(data['release_date'][0], type(data['release_date'][0]))
-genres_list = data['genres_list'].explode().unique()
-print(genres_list, type(genres_list))
+genres_list = data['genres_list'].explode().unique()[:20]
+print(genres_list)
 
 batch_size = 32
 img_width = 190
@@ -63,6 +61,20 @@ img_height = 281
 
 img_dir = '../_lab-4/movies_posters/'
 
+def process_path(img_path):
+    global genres_list
+    img_id = img_path.split(os.sep)[-1].split('.')[0]
+    label = data.loc(data['id']==img_id)['genres_list']
+    label = list(filter(lambda x: x in genres_list, label))
+    return tf.io.read_file(img_path), label
+
+list_ds = tf.data.Dataset.list_files(img_dir)
+
+labeled_ds = list_ds.map(process_path)
+
+for img, lab in labeled_ds.take(1):
+    print(repr(img.numpy()[:30]))
+    print(lab.numpy)
 
 train_ds = tf.keras.utils.image_dataset_from_directory(directory=img_dir, image_size=(img_height, img_width),
         validation_split=.1, subset='training', seed=99, batch_size=batch_size)
