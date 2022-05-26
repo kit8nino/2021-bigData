@@ -31,3 +31,6 @@ print(f'All rating above 3.2: {pA}')
 B = dt2.loc[south_countries].apply(foo_true)
 pB = len(B[B==True].index)/len(B.index)
 print(f'Only south rating above 3.2: {pB}')
+
+print('Number of countries in south where rating is above 3.3')
+print(df[(df['Company Location'].isin(south_countries)) & (df['Rating'] > 3.3)].count()['Rating'])
