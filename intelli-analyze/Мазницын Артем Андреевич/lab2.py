@@ -20,6 +20,7 @@ ax = sns.barplot(y=datP.index, x=datP.array, palette='deep')
 ax.set_title('Условная вероятность получения оценки выше 3.1 при содержании какао выше 73% в странах северного полушария')
 ax.set_yticklabels(labels=datP.index, rotation=0)
 plt.show()
+
 datY = data.query('`Review Date` > 2014')
 datM = data.query('`Review Date` > 2010')['Rating'].median()
 datF = getData(datY, f'Rating > {datM}', group=None)
