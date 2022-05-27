@@ -6,6 +6,12 @@ data = pd.read_csv('flavors_of_cacao.csv')
 data['Cocoa Percent'] = data['Cocoa Percent'].replace('%', '', regex=True).astype('float32')
 north = ['Amsterdam', 'Belgium', 'Brazil', 'Canada', 'Colombia', 'Ecuador', 'France', 'Israel', 'Italy',
                      'Lithuania', 'Sao Tome', 'Scotland', 'Switzerland', 'U.K.', 'U.S.A.']
+def getData(data, cond, selecter='Rating', group='Company Location'):
+    df = data.query(cond)
+    if group is not None:
+        data = data.groupby(group)
+        df = df.groupby(group)
+    return df[selecter].count() / data[selecter].count()
 
 datR = getData(data, 'Rating > 3.1').dropna()
 plt.subplots(figsize=(14, 9))
