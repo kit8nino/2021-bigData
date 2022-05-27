@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv('flavors_of_cacao.csv')
+df = pd.read_csv('../flavors_of_cacao.csv')
 south_countries = ['Australia', 'Argentina', 'Bolivia', 'Peru', 'Brazil', 'Chile', 'Colombia','Ecuador', 'Madagascar', 'New Zealand', 'Sao Tome', 'Fiji']
 #-----------------------------------------------1 пункт----------------------------------------------------------
 df1 = df.groupby(by=['Company Location'])['Company Location'].unique()

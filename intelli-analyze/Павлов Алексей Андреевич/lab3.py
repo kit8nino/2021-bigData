@@ -6,6 +6,7 @@ def calculate(x):
 
 
 def solve_equation(a, b, e):
+    # никаких переменных и циклов быть не должно
     curIter = 1
     x = (a + b) / 2
     y = calculate(x)

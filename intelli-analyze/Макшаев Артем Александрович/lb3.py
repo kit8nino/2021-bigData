@@ -14,7 +14,7 @@ def calculate(epsilon, x):
     if eps(x, func(x)) > epsilon:
         return calculate(epsilon, func(x))
     else:
-        return func(x)
+        return x
 
 print("\nФункция: x^2-ln(x+1)=0")
 epsilon = float(input("Введите погрешность: "))

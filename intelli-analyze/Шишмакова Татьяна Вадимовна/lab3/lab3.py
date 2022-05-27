@@ -17,7 +17,7 @@ def solve_equation(x, presition):
     if epsilon(x) > presition:
         return solve_equation(equation_func(x), presition)
     else:
-        return equation_func(x)
+        return x
 
 print("\nФункция: x^2-ln(x+1)=0")
 presition = float(input("Введите погрешность: "))

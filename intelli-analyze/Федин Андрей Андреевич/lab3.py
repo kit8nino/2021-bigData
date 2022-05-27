@@ -14,7 +14,7 @@ def eps(a, b):
 
 def solve(x, e):
     if eps(x, tangent(x)) < e: 
-        return tangent(x)
+        return x
     else:
         return solve(tangent(x), e)
 

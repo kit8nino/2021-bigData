@@ -4,7 +4,7 @@ import matplotlib as plt
 import matplotlib.pyplot as plt
 
 data = pd.read_csv(
-    './intelli-analyze/Гараев Денис Ильдарович/flavors_of_cacao.csv')
+    './flavors_of_cacao.csv')
 ratingByDate = data.groupby(['Review Date'])['Rating']
 dates = data['Review Date'].unique()
 dates.sort()

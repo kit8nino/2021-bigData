@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-data = pd.read_csv(r'C:\Users\polin\Downloads\flavors_of_cacao.csv', header=0)
+data = pd.read_csv(r'flavors_of_cacao.csv', header=0)
 df=data.groupby(by=['Company Location'])['Company Location'].unique()
 
 #Посчитать априорные вероятности для каждой страны происхождения (Company Location) получения оценки выше 3.1

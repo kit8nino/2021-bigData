@@ -67,17 +67,17 @@ def process_path(img_path):
     img_id = str(img_path).split(os.sep)[-1].split('.')[0]
     # label = data.loc(data['id']==img_id)['genres_list'].values()
     label = data.loc[data['id'] == img_id,['genres_list']]
-    label = list(filter(lambda x: x in genres_list, label))
+    label = list(filter(lambda x: x in genres_list, label['genres_list']))
     return tf.io.read_file(img_path), label
 
 list_ds = tf.data.Dataset.list_files(img_dir+'*.jpg')
 
 labeled_ds = list_ds.map(process_path)
 
-train_ds = tf.keras.utils.image_dataset_from_directory(directory=img_dir, image_size=(img_height, img_width),
-        validation_split=.1, subset='training', seed=99, batch_size=batch_size)
-test_ds = tf.keras.utils.image_dataset_from_directory(directory=img_dir, image_size=(img_height, img_width),
-        validation_split=.1, subset='validation', seed=99, batch_size=batch_size)
+# train_ds = tf.keras.utils.image_dataset_from_directory(directory=img_dir, image_size=(img_height, img_width),
+#         validation_split=.1, subset='training', seed=99, batch_size=batch_size)
+# test_ds = tf.keras.utils.image_dataset_from_directory(directory=img_dir, image_size=(img_height, img_width),
+#         validation_split=.1, subset='validation', seed=99, batch_size=batch_size)
 
 img_count = len(list(data_dir.glob('*.jpg')))
 print("Total images: ", img_count)
@@ -102,4 +102,3 @@ model = Sequential([
     ])
 
 model.compile(optimizer='adam', loss=tf.kers.losses.SparceCategoricalCrossentropy(from_logits=True), metrics=['accuracy'])
-"""

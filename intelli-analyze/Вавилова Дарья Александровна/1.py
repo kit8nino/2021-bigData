@@ -46,6 +46,7 @@ plt.title("Средне-квадратичное отклонение", fontsize
 plt.subplots_adjust(top=0.9, bottom=0.18, left=0.06, right=0.95, hspace=0.7, wspace=0.2)
 plt.show()
 
+data['Cocoa Percent'].map(lambda x: float(x[:-1]))
 df3 = data.sort_values(by='Cocoa Percent').groupby("Cocoa Percent")
 plt.subplot(1, 1, 1)
 plt.plot(df3['Rating'].mean(), label='среднее содержание какао')

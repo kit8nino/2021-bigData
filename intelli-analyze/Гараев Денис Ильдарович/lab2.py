@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 data = pd.read_csv(
-    './intelli-analyze/Гараев Денис Ильдарович/flavors_of_cacao.csv')
+    './flavors_of_cacao.csv')
 
 dataFloatPerc = data
 dataFloatPerc['Cocoa Percent'] = dataFloatPerc['Cocoa Percent'].str.strip('%').astype('float')
