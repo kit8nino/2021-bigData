@@ -3,7 +3,7 @@ from ast import literal_eval
 import tensorflow as tf
 from PIL import Image
 import os.path
-import os.sep
+import os
 from bs4 import BeautifulSoup
 import requests
 import pandas as pd
@@ -60,21 +60,19 @@ img_width = 190
 img_height = 281
 
 img_dir = '../_lab-4/movies_posters/'
+# img_dir = '.\\movies_posters'
 
 def process_path(img_path):
     global genres_list
-    img_id = img_path.split(os.sep)[-1].split('.')[0]
-    label = data.loc(data['id']==img_id)['genres_list']
+    img_id = str(img_path).split(os.sep)[-1].split('.')[0]
+    # label = data.loc(data['id']==img_id)['genres_list'].values()
+    label = data.loc[data['id'] == img_id,['genres_list']]
     label = list(filter(lambda x: x in genres_list, label))
     return tf.io.read_file(img_path), label
 
-list_ds = tf.data.Dataset.list_files(img_dir)
+list_ds = tf.data.Dataset.list_files(img_dir+'*.jpg')
 
 labeled_ds = list_ds.map(process_path)
-
-for img, lab in labeled_ds.take(1):
-    print(repr(img.numpy()[:30]))
-    print(lab.numpy)
 
 train_ds = tf.keras.utils.image_dataset_from_directory(directory=img_dir, image_size=(img_height, img_width),
         validation_split=.1, subset='training', seed=99, batch_size=batch_size)
@@ -104,3 +102,4 @@ model = Sequential([
     ])
 
 model.compile(optimizer='adam', loss=tf.kers.losses.SparceCategoricalCrossentropy(from_logits=True), metrics=['accuracy'])
+"""
